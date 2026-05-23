@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Studios Riba — Desarrolladora independiente de videojuegos. Creadores de Kurt Cobalto, Makka Pakka 2 y experiencias inmersivas. Intenta sobrevivir.">
+  <meta name="keywords" content="Studios Riba, videojuegos independientes, horror games, itch.io, Kurt Cobalto, Makka Pakka, desarrollo de videojuegos">
+  
+  <!-- OpenGraph / Social Media -->
+  <meta property="og:title" content="Studios Riba — Videojuegos Independientes">
+  <meta property="og:description" content="Desarrolladora de videojuegos indie. Explora nuestro catálogo de juegos en itch.io.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="media/favicon.jpg">
+  <meta property="og:url" content="https://studiosriba.github.io/studiosriba.html">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@_studiosriba">
+  <meta name="twitter:title" content="Studios Riba — Videojuegos Independientes">
+  <meta name="twitter:description" content="Desarrolladora de videojuegos indie. Explora nuestro catálogo de juegos en itch.io.">
+  <meta name="twitter:image" content="media/favicon.jpg">
+
+  <title>Studios Riba — Desarrolladora Independiente de Videojuegos</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Cormorant:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/jpeg" href="media/favicon.jpg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="studios-riba" class="scanlines">
+
+  <!-- ── LOADER ─────────────────────────────────────────────────── -->
+  <div id="loader" role="status" aria-label="Cargando Studios Riba">
+    <div class="loader-content">
+      <img src="media/StudiosRiba.png" alt="Studios Riba" class="loader-logo">
+    </div>
+  </div>
+
+  <!-- ── PAGE FLASH ─────────────────────────────────────────────── -->
+  <div id="page-flash" aria-hidden="true"></div>
+
+  <!-- ── CURSOR ─────────────────────────────────────────────────── -->
+  <div id="cursor-dot" aria-hidden="true"></div>
+  <div id="cursor-trail" aria-hidden="true"></div>
+
+  <!-- ── PARTICLES ──────────────────────────────────────────────── -->
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <!-- ── NAV ────────────────────────────────────────────────────── -->
+  <nav class="nav-sr" role="navigation" aria-label="Navegación principal">
+    <a class="nav-logo" href="index.html" data-transition="true" aria-label="Volver al inicio">
+      <img src="media/StudiosRiba.png" alt="Studios Riba" height="40">
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="#about"   id="nav-link-about">INICIO</a></li>
+      <li><a href="#games"   id="nav-link-games">JUEGOS</a></li>
+      <li><a href="#store"   id="nav-link-store">TIENDA</a></li>
+      <li><a href="#contact" id="nav-link-contact">CONTACTO</a></li>
+    </ul>
+    <a class="nav-switch" href="studiosribaproductions.html" data-transition="true" id="nav-switch-srp">
+      SR PRODUCTIONS →
+    </a>
+    <button class="nav-hamburger" aria-label="Abrir menú" aria-expanded="false" id="nav-hamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── HERO ───────────────────────────────────────────────────── -->
+  <section class="sr-hero" id="hero" aria-label="Hero Studios Riba">
+    <div class="sr-hero-bg" aria-hidden="true"></div>
+    <div class="sr-hero-content">
+      <img
+        src="media/StudiosRiba.png"
+        alt="Studios Riba"
+        class="sr-hero-logo"
+        width="520"
+        height="260">
+      <p class="sr-hero-subtitle" aria-live="polite"></p>
+    </div>
+    <div class="sr-scroll-indicator" aria-hidden="true"></div>
+  </section>
+
+  <!-- ── ABOUT ──────────────────────────────────────────────────── -->
+  <section class="sr-about reveal-group" id="about" aria-labelledby="sr-about-title">
+    <div class="sr-about-inner">
+
+      <div class="sr-about-text reveal">
+        <span class="sr-section-tag">// 01</span>
+        <h2 id="sr-about-title">Somos<br>Studios<br>Riba</h2>
+        <p>
+          ¿Qué es lo que hacemos? Mejor descúbrelo tú mismo
+          y cuéntanos — <em>Intenta sobrevivir.</em>
+        </p>
+        <p>
+          Prueba nuestros juegos y adéntrate en lo desconocido.
+          Cada título es un mundo que desafía tus límites, una
+          experiencia que no olvidarás fácilmente.
+        </p>
+        <a
+          href="https://studiosriba.itch.io"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="sr-itch-inline-btn"
+          id="sr-about-itch-btn">
+          VER TODOS LOS JUEGOS
+        </a>
+      </div>
+
+      <div class="sr-about-visual reveal reveal-right">
+        <canvas class="sr-pixel-art" width="400" height="300" aria-hidden="true"></canvas>
+        <span class="sr-about-bg-text" aria-hidden="true">GAME<br>DEV</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── JUEGOS ─────────────────────────────────────────────────── -->
+  <section class="sr-games" id="games" aria-labelledby="sr-games-title">
+
+    <div class="sr-games-wrapper">
+
+      <div class="sr-section-header reveal">
+        <span class="sr-section-tag">// 02</span>
+        <h2 id="sr-games-title">Nuestros<br>Juegos</h2>
+      </div>
+
+      <div class="sr-games-grid" id="sr-games-grid">
+        <!-- Games will be injected here by script.js -->
+      </div><!-- /.sr-games-grid -->
+
+    </div><!-- /.sr-games-wrapper -->
+
+  </section>
+
+  <!-- ── TIENDA ITCH.IO ─────────────────────────────────────────── -->
+  <section class="sr-itch-banner" id="store" aria-label="Tienda en itch.io">
+    <div class="sr-itch-banner-inner">
+      <div class="sr-itch-banner-text reveal">
+        <span class="sr-section-tag">// TIENDA</span>
+        <h2 class="sr-itch-title">Todos nuestros juegos<br>en <span class="sr-itch-accent">itch.io</span></h2>
+        <p class="sr-itch-sub">Disponibles ahora. Gratis o a tu precio.</p>
+      </div>
+      <a
+        href="https://studiosriba.itch.io"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="sr-itch-cta reveal"
+        data-cursor="expand"
+        id="sr-itch-cta-btn">
+        <span class="sr-itch-cta-icon" aria-hidden="true">⊕</span>
+        VISITAR TIENDA
+      </a>
+    </div>
+    <div class="sr-itch-banner-line" aria-hidden="true"></div>
+  </section>
+
+  <!-- ── CONTACTO ───────────────────────────────────────────────── -->
+  <section class="sr-contact" id="contact" aria-labelledby="sr-contact-title">
+    <div class="reveal">
+      <span class="sr-section-tag">// 03</span>
+      <h2 class="sr-contact-title" id="sr-contact-title">¿Listo para<br>lo desconocido?</h2>
+      <p class="sr-contact-sub">Escríbenos y cuéntanos qué piensas.</p>
+      <a
+        href="mailto:studiosriba@gmail.com"
+        class="sr-contact-cta"
+        data-cursor="expand"
+        id="sr-contact-cta">
+        studiosriba@gmail.com
+      </a>
+      <div class="sr-social-links">
+        <a href="https://www.youtube.com/@studiosriba" target="_blank" rel="noopener noreferrer"
+           class="sr-social-link" id="sr-social-yt" aria-label="YouTube de Studios Riba">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/>
+          </svg>
+          YouTube
+        </a>
+        <a href="https://x.com/_studiosriba" target="_blank" rel="noopener noreferrer"
+           class="sr-social-link" id="sr-social-tw" aria-label="Twitter / X de Studios Riba">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.736-8.836L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+          Twitter / X
+        </a>
+        <a href="https://linktr.ee/studiosriba" target="_blank" rel="noopener noreferrer"
+           class="sr-social-link" id="sr-social-lt" aria-label="Linktree de Studios Riba">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M13.511 5.853l4.005-4.117 2.394 2.465-4.192 4.094h5.883v3.388h-5.937l4.192 4.094-2.394 2.464-5.943-6.069-5.943 6.069-2.394-2.464 4.192-4.094H1.399V8.295h5.883L3.09 4.201l2.394-2.465 4.005 4.117V0h4.022zm-4.022 16.238h4.022V24h-4.022z"/>
+          </svg>
+          Linktree
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────────── -->
+  <footer>
+    <img src="media/StudiosRiba.png" alt="Studios Riba" class="footer-logo">
+    <span class="footer-copy">© 2025 Studios Riba. Todos los derechos reservados.</span>
+    <a
+      href="studiosribaproductions.html"
+      class="footer-switch-link"
+      data-transition="true"
+      id="footer-switch-srp">
+      IR A PRODUCTIONS →
+    </a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
