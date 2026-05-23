@@ -7,7 +7,7 @@
 > **Studios Riba** es una desarrolladora independiente de videojuegos y productora de cortometrajes de autor. Descubre experiencias interactivas como Kurt Cobalto y Makka Pakka 2, o sumérgete en thrillers cinematográficos como El Caso Darkface. Cine y videojuegos unidos por una misma visión artística y cuidada estética audiovisual. Elige tu universo.
 
 <div align="center">
-  <a href="https://studiosriba.github.io/">🌐 Visita nuestro sitio web</a> |
+  <a href="[https://studiosriba.github.io](https://studiosriba.netlify.app)/">🌐 Visita nuestro sitio web</a> |
   <a href="https://studiosriba.itch.io/">🎮 Juegos en itch.io</a> |
   <a href="https://www.youtube.com/@studiosriba">📺 YouTube</a> |
   <a href="https://x.com/_studiosriba">🐦 Twitter/X</a>
