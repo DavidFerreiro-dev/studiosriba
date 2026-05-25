@@ -108,8 +108,11 @@
       </div>
 
       <div class="sr-about-visual reveal reveal-right">
-        <canvas class="sr-pixel-art" width="400" height="300" aria-hidden="true"></canvas>
-        <span class="sr-about-bg-text" aria-hidden="true">GAME<br>DEV</span>
+        <img
+          src="https://img.itch.zone/aW1nLzIwOTkzMTg0LmdpZg==/original/rN%2FeLE.gif"
+          alt="Studios Riba showcase"
+          class="sr-about-gif"
+          loading="lazy">
       </div>
 
     </div>
@@ -126,7 +129,57 @@
       </div>
 
       <div class="sr-games-grid" id="sr-games-grid">
-        <!-- Games will be injected here by script.js -->
+        <article class="sr-game-card reveal visible" data-cursor="expand" style="--delay:0s"
+                 aria-label="Kurt Cobalto — Studios Riba">
+          <div class="sr-game-card-img"
+               style="background-image: url('https://i.ibb.co/prxT6sYz/kurtcobalto.gif');"
+               aria-hidden="true"></div>
+          <div class="sr-game-card-overlay" aria-hidden="true"></div>
+          <div class="sr-game-number" aria-hidden="true">01</div>
+          <div class="sr-game-card-info">
+            <span class="sr-game-badge">NUEVO</span>
+            <h3 class="sr-game-title">KURT COBALTO</h3>
+            <p class="sr-game-desc">Es 1994. Eres Kurt — icono del grunge, fantasma cultural, atrapado en un apartamento de Seattle lleno de cintas VHS, franelas sucias y una escopeta en el suelo. Un juego sobre deambular, recordar... o apretar el gatillo.</p>
+            <a href="https://studiosriba.itch.io/kurt-cobalto"
+               target="_blank" rel="noopener noreferrer"
+               class="sr-game-play-link" id="sr-game-play-kurt-cobalto">
+              <span class="sr-game-play-icon" aria-hidden="true">↗</span>
+              JUGAR AHORA
+            </a>
+          </div>
+        </article>
+
+        <article class="sr-game-card reveal visible" data-cursor="expand" style="--delay:0.07s"
+                 aria-label="Makka Pakka 2 — Studios Riba">
+          <div class="sr-game-card-img"
+               style="background-image: url('https://i.ibb.co/gZxZ04KT/MAKKAPAKKA2.gif');"
+               aria-hidden="true"></div>
+          <div class="sr-game-card-overlay" aria-hidden="true"></div>
+          <div class="sr-game-number" aria-hidden="true">02</div>
+          <div class="sr-game-card-info">
+            <h3 class="sr-game-title">MAKKA PAKKA 2</h3>
+            <p class="sr-game-desc">La esperada secuela de Makka Pakka llega con una jugabilidad renovada y mejoras que prometen una experiencia aún más intensa. Vuelve al caos.</p>
+            <a href="https://studiosriba.itch.io/makka-pakka-2"
+               target="_blank" rel="noopener noreferrer"
+               class="sr-game-play-link" id="sr-game-play-makka-pakka-2">
+              <span class="sr-game-play-icon" aria-hidden="true">↗</span>
+              JUGAR AHORA
+            </a>
+          </div>
+        </article>
+
+        <article class="sr-game-card sr-game-card-more reveal visible" data-cursor="expand" style="--delay:0.14s"
+                 aria-label="Ver todos los juegos en itch.io">
+          <div class="sr-game-card-more-bg" aria-hidden="true"></div>
+          <a href="https://studiosriba.itch.io"
+             target="_blank" rel="noopener noreferrer"
+             class="sr-game-more-inner"
+             id="sr-game-more-link">
+            <span class="sr-game-more-label">VER MÁS</span>
+            <span class="sr-game-more-arrow" aria-hidden="true">↗</span>
+            <span class="sr-game-more-sub">Todos nuestros juegos en itch.io</span>
+          </a>
+        </article>
       </div><!-- /.sr-games-grid -->
 
     </div><!-- /.sr-games-wrapper -->
@@ -220,7 +273,10 @@
     </div>
   </section>
   <footer>
-    <img src="media/StudiosRiba.png" alt="Studios Riba" class="footer-logo">
+    <div class="footer-brand">
+      <img src="media/StudiosRiba.png" alt="Studios Riba" class="footer-logo">
+      <span class="footer-legacy">Logo antiguo 2023-2025</span>
+    </div>
     <span class="footer-copy">© 2026 Studios Riba — Since 2022. Todos los derechos reservados.</span>
     <a
       href="studiosribaproductions.html"

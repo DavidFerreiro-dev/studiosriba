@@ -615,11 +615,11 @@ class DatabaseRenderer {
     this.moviesContainer = document.getElementById('srp-movies-container');
     
     if (this.gamesGrid && PAGE === 'studios-riba') {
-      this.renderGames();
+      if (this.gamesGrid.children.length === 0) this.renderGames();
     }
     
     if (this.moviesContainer && PAGE === 'srp') {
-      this.renderMovies();
+      if (this.moviesContainer.children.length === 0) this.renderMovies();
     }
   }
 
@@ -656,7 +656,7 @@ class DatabaseRenderer {
         const badgeHtml = game.badge ? `<span class="sr-game-badge">${game.badge}</span>` : '';
         
         html += `
-          <article class="sr-game-card reveal" data-cursor="expand" style="--delay:${delay}s"
+          <article class="sr-game-card reveal visible" data-cursor="expand" style="--delay:${delay}s"
                    aria-label="${game.title} — Studios Riba">
             <div class="sr-game-card-img"
                  style="background-image: url('${game.coverImage}');"
@@ -681,7 +681,7 @@ class DatabaseRenderer {
       // Append static 'VER MÁS' card
       const moreDelay = games.length * 0.07;
       html += `
-        <article class="sr-game-card sr-game-card-more reveal" data-cursor="expand" style="--delay:${moreDelay}s"
+        <article class="sr-game-card sr-game-card-more reveal visible" data-cursor="expand" style="--delay:${moreDelay}s"
                  aria-label="Ver todos los juegos en itch.io">
           <div class="sr-game-card-more-bg" aria-hidden="true"></div>
           <a href="https://studiosriba.itch.io"
@@ -729,7 +729,7 @@ class DatabaseRenderer {
           </a>` : '';
           
         html += `
-          <div class="srp-film-showcase reveal-scale" style="--delay:${delay}s; margin-bottom: 80px;">
+          <div class="srp-film-showcase reveal-scale visible" style="--delay:${delay}s; margin-bottom: 80px;">
             <div class="srp-film-poster">
               <img src="${movie.posterImage}" alt="${movie.title} — Studios Riba Productions" class="srp-film-poster-img">
               <div class="srp-film-poster-glow" aria-hidden="true"></div>
