@@ -53,9 +53,10 @@
       <img src="media/SRProductions.png" alt="Studios Riba Productions" height="40">
     </a>
     <ul class="nav-links" role="list">
-      <li><a href="#hero"    id="nav-link-inicio">INICIO</a></li>
-      <li><a href="#films"   id="nav-link-films">FILMOGRAFÍA</a></li>
-      <li><a href="#contact" id="nav-link-contact">CONTACTO</a></li>
+      <li><a href="#hero"         id="nav-link-inicio">INICIO</a></li>
+      <li><a href="#films"        id="nav-link-films">FILMOGRAFÍA</a></li>
+      <li><a href="#distributors" id="nav-link-distributors" class="nav-cta">DISTRIBUIDORES</a></li>
+      <li><a href="#contact"      id="nav-link-contact">CONTACTO</a></li>
     </ul>
     <a class="nav-switch" href="studiosriba.html" data-transition="true" id="nav-switch-sr">
       ← STUDIOS RIBA
@@ -118,6 +119,24 @@
 
   </section>
 
+  <!-- ── DISTRIBUIDORES ───────────────────────────────────── -->
+  <section class="srp-distributors" id="distributors" aria-labelledby="srp-distributors-title">
+    <div class="srp-section-header reveal">
+      <span class="srp-eyebrow">Distribuidores</span>
+      <h2 class="srp-section-title" id="srp-distributors-title">Distribuidores</h2>
+    </div>
+    <div class="srp-distributor-item reveal">
+      <a href="https://playnexotv.me" target="_blank" rel="noopener noreferrer" class="srp-distributor-link">
+        <img src="media/nexo.png" alt="NEXO.TV" class="srp-distributor-logo">
+      </a>
+      <div class="srp-distributor-text">
+        <h3>NEXO.TV</h3>
+        <p>NEXO.TV es una plataforma dedicada a la preservación cinematográfica digital y al streaming de acceso libre. Su misión es rescatar, curar y facilitar el acceso a obras maestras del cine que forman parte del patrimonio común, además de ofrecer versiones restauradas y doblajes exclusivos realizados por su equipo. El proyecto mantiene una estructura web de código abierto con fines educativos, culturales y de entretenimiento sin ánimo de lucro directo.</p>
+        <p><a href="https://playnexotv.me" target="_blank" rel="noopener noreferrer" class="srp-distributor-cta">Visitar NEXO.TV</a></p>
+      </div>
+    </div>
+  </section>
+
 
 
   <!-- ── CONTACTO ───────────────────────────────────────────────── -->
@@ -137,10 +156,35 @@
     </div>
   </section>
 
+  <!-- ── CRÉDITOS Y EQUIPO (SRP) ───────────────────────────────── -->
+  <section class="srp-credits" id="credits" aria-labelledby="srp-credits-title">
+    <div class="reveal">
+      <span class="srp-eyebrow">// CRÉDITOS</span>
+      <h2 class="srp-credits-title" id="srp-credits-title">Créditos y equipo</h2>
+      <div class="srp-team">
+        <div class="srp-team-member">
+          <h3>David Ferreiro – Director Ejecutivo y Director Creativo</h3>
+          <p>
+            Instagram: <a href="https://instagram.com/deybidd__" target="_blank" rel="noopener noreferrer">@deybidd__</a><br>
+            Email: <a href="mailto:davidjoseferreiro@gmail.com">davidjoseferreiro@gmail.com</a><br>
+            GitHub: <a href="https://github.com/DavidFerreiro-dev" target="_blank" rel="noopener noreferrer">DavidFerreiro-dev</a>
+          </p>
+        </div>
+        <div class="srp-team-member">
+          <h3>Roi Cougil – Co-Fundador y Desarrollador Principal</h3>
+          <p>
+            Email: <a href="mailto:cougilroi@gmail.com">cougilroi@gmail.com</a><br>
+            GitHub: <a href="https://github.com/Roi-Cougil" target="_blank" rel="noopener noreferrer">Roi-Cougil</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ── FOOTER ─────────────────────────────────────────────────── -->
   <footer class="footer-srp">
     <img src="media/SRProductions.png" alt="Studios Riba Productions" class="footer-logo">
-    <span class="footer-copy">© 2025 Studios Riba Productions. Todos los derechos reservados.</span>
+    <span class="footer-copy">© 2026 Studios Riba Productions — Since 2024. Todos los derechos reservados.</span>
     <a
       href="studiosriba.html"
       class="footer-switch-link"
@@ -149,6 +193,23 @@
       ← STUDIOS RIBA
     </a>
   </footer>
+
+  <script id="srp-movies-data" type="application/json">
+  [
+    {
+      "id": "el-caso-darkface",
+      "title": "El Caso Darkface",
+      "year": 2026,
+      "type": "Cortometraje",
+      "synopsis": "En una oscura ciudad californiana, el detective Vincent Moreau investiga una serie de asesinatos cometidos por el misterioso «Darkface», un asesino que deja una pluma sobre cada víctima. Mientras las sospechas y la paranoia crecen, Vincent descubre que la verdad se oculta dentro de la propia comisaría, llevando el caso a un enfrentamiento final lleno de tensión, traición y violencia.",
+      "posterImage": "https://image.tmdb.org/t/p/original/pW53nJ7PS5aKuxbCLbE02qIg9t8.png",
+      "links": {
+        "nexoTv": "https://playnexotv.me/69",
+        "tmdb": "https://www.themoviedb.org/movie/1701009-el-caso-darkface"
+      }
+    }
+  ]
+  </script>
 
   <script src="script.js"></script>
 </body>

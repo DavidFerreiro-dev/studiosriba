@@ -148,31 +148,19 @@ body.grain::before {
 
 /* SRP cursor variant */
 body[data-page="srp"] #cursor-dot {
-  background: transparent;
-  border: 1px solid var(--srp-silver);
-  width: 16px; height: 16px;
+  background: var(--srp-silver);
+  border: none;
+  width: 6px; height: 6px;
   border-radius: 50%;
   position: fixed; /* needed for absolute children */
 }
 body[data-page="srp"] #cursor-dot::before,
 body[data-page="srp"] #cursor-dot::after {
-  content: '';
-  position: absolute;
-  background: var(--srp-silver);
-}
-body[data-page="srp"] #cursor-dot::before {
-  width: 1px; height: 8px;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-}
-body[data-page="srp"] #cursor-dot::after {
-  width: 8px; height: 1px;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
+  content: none;
 }
 
 body[data-page="srp"] #cursor-trail {
-  border-color: rgba(200,200,200,0.15);
+  display: none;
 }
 
 /* Expanded state */
@@ -305,14 +293,39 @@ nav.nav-sr .nav-links a::after { background: var(--sr-red); }
 /* SRP nav */
 nav.nav-srp .nav-links a {
   font-family: var(--font-srp-display);
-  font-size: 14px;
-  letter-spacing: 0.35em;
+  font-size: 13px;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--srp-mid);
   font-style: italic;
 }
 nav.nav-srp .nav-links a:hover { color: #fff; }
 nav.nav-srp .nav-links a::after { background: var(--srp-silver); }
+
+nav.nav-srp .nav-links a.nav-cta {
+  border: 1px solid rgba(200,200,200,0.4);
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: var(--srp-silver);
+  letter-spacing: 0.18em;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+nav.nav-srp .nav-links a.nav-cta:hover {
+  background: var(--srp-silver);
+  color: #000;
+  border-color: var(--srp-silver);
+}
+
+nav.nav-srp .nav-links {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 22px 28px;
+}
+
+@media (max-width: 1200px) {
+  nav.nav-srp .nav-links a { font-size: 12px; letter-spacing: 0.22em; }
+  nav.nav-srp .nav-links a.nav-cta { padding: 6px 12px; }
+}
 
 /* Nav switch button */
 .nav-switch {
@@ -799,6 +812,21 @@ nav.nav-srp .nav-mobile-menu a:hover { color: var(--srp-silver); }
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   width: 100%;
+}
+
+.sr-data-empty {
+  font-family: var(--font-sr-body);
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.08em;
+  text-align: center;
+  padding: 24px 0;
+}
+
+body[data-page="srp"] .sr-data-empty {
+  font-family: var(--font-srp-display);
+  font-style: italic;
+  letter-spacing: 0.12em;
 }
 
 .sr-game-card {
@@ -1889,8 +1917,8 @@ nav.nav-srp .nav-mobile-menu a:hover { color: var(--srp-silver); }
    FOOTER
    ═══════════════════════════════════════════════════════════════════ */
 footer {
-  padding: 40px 48px;
-  background: #000;
+  padding: 48px 48px;
+  background: linear-gradient(180deg, rgba(5,5,5,0.95) 0%, rgba(0,0,0,1) 100%);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1912,20 +1940,21 @@ footer.footer-srp {
 
 .footer-copy {
   font-family: var(--font-sr-body);
-  font-size: 10px;
-  color: rgba(255,255,255,0.25);
-  letter-spacing: 0.1em;
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.08em;
 }
 
 footer.footer-srp .footer-copy {
   font-family: var(--font-srp-display);
   font-style: italic;
+  color: rgba(255,255,255,0.72);
 }
 
 .footer-switch-link {
   font-family: var(--font-sr-body);
   font-size: 10px;
-  color: rgba(204,0,0,0.6);
+  color: rgba(204,0,0,0.85);
   text-decoration: none;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -1937,10 +1966,210 @@ footer.footer-srp .footer-switch-link {
   font-family: var(--font-srp-display);
   font-style: italic;
   font-size: 12px;
-  color: rgba(200,200,200,0.35);
+  color: rgba(200,200,200,0.7);
   letter-spacing: 0.25em;
 }
 footer.footer-srp .footer-switch-link:hover { color: var(--srp-silver); }
+
+/* ── CRÉDITOS (Studios Riba) ───────────────────────────────────── */
+.sr-credits {
+  padding: 48px 48px;
+  background: #050505;
+  border-top: 1px solid rgba(204,0,0,0.12);
+  color: rgba(255,255,255,0.95);
+}
+.sr-credits .sr-credits-title {
+  font-family: var(--font-sr-display);
+  font-size: 28px;
+  color: #fff;
+  margin-bottom: 16px;
+}
+.sr-team {
+  display: flex;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.sr-team-member {
+  flex: 1 1 300px;
+  padding: 18px 20px;
+  border: 1px solid rgba(204,0,0,0.15);
+  background: rgba(255,255,255,0.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  transform: translateY(0);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  animation: creditsFloat 10s ease-in-out infinite;
+}
+.sr-team-member:nth-child(2) { animation-delay: 1.4s; }
+.sr-team-member h3 {
+  font-family: var(--font-sr-body);
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.sr-team-member:hover {
+  transform: translateY(-6px);
+  border-color: rgba(204,0,0,0.45);
+  box-shadow: 0 18px 40px rgba(204,0,0,0.2);
+}
+.sr-team-member p {
+  font-family: var(--font-sr-body);
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+}
+.sr-team-member a {
+  color: var(--sr-red);
+  text-decoration: none;
+}
+.sr-team-member a:hover { text-decoration: underline; }
+
+/* ── DISTRIBUIDORES (SR Productions) ───────────────────────────── */
+.srp-distributors {
+  padding: 56px 48px;
+  background: #050505;
+  border-top: 1px solid rgba(200,200,200,0.04);
+}
+.srp-distributor-item {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  padding: 0 48px;
+  flex-wrap: wrap;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(200,200,200,0.08);
+  border-radius: 16px;
+  padding: 24px 32px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.srp-distributor-item:hover {
+  transform: translateY(-6px);
+  border-color: rgba(200,200,200,0.25);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.4);
+}
+.srp-distributor-logo {
+  height: 84px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6));
+  animation: logoGlow 6s ease-in-out infinite;
+}
+.srp-distributor-text {
+  max-width: 800px;
+  color: rgba(255,255,255,0.9);
+  font-family: var(--font-srp-body);
+  line-height: 1.8;
+}
+.srp-distributor-text h3 {
+  font-family: var(--font-srp-display);
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: #fff;
+}
+.srp-distributor-text p { color: rgba(255,255,255,0.75); }
+
+.srp-distributor-link { display: inline-flex; }
+
+.srp-distributor-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 10px 18px;
+  border: 1px solid rgba(200,200,200,0.4);
+  border-radius: 999px;
+  color: var(--srp-silver);
+  font-family: var(--font-srp-display);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+.srp-distributor-cta::after {
+  content: '↗';
+  font-size: 12px;
+  opacity: 0.7;
+}
+.srp-distributor-cta:hover {
+  background: var(--srp-silver);
+  color: #000;
+  border-color: var(--srp-silver);
+  transform: translateY(-2px);
+}
+
+@keyframes creditsFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes logoGlow {
+  0%, 100% { filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6)); }
+  50% { filter: drop-shadow(0 10px 30px rgba(200,200,200,0.25)); }
+}
+
+/* Responsivo: apilar en móvil */
+@media (max-width: 768px) {
+  .sr-team { padding: 0 24px; gap: 20px; }
+  .sr-credits { padding: 32px 24px; }
+  .srp-distributor-item {
+    padding: 20px 24px;
+    gap: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .srp-distributor-logo { height: 64px; }
+  .srp-distributor-text { font-size: 15px; }
+  nav.nav-srp .nav-links a.nav-cta { padding: 6px 12px; }
+  .srp-distributor-cta { font-size: 11px; }
+}
+
+/* SRP credits reuse the SR styles where possible */
+.srp-credits {
+  padding: 48px 48px;
+  background: #050505;
+  border-top: 1px solid rgba(200,200,200,0.04);
+  color: rgba(255,255,255,0.95);
+}
+.srp-credits .srp-credits-title {
+  font-family: var(--font-srp-display);
+  font-size: 26px;
+  color: #fff;
+  margin-bottom: 16px;
+}
+.srp-team { display: flex; gap: 32px; max-width: 1200px; margin: 0 auto; padding: 0 48px; flex-wrap: wrap; }
+.srp-team-member h3 { font-family: var(--font-srp-display); font-size: 16px; color: #fff; margin-bottom: 8px; }
+.srp-team-member p { font-family: var(--font-srp-body); color: rgba(255,255,255,0.75); line-height: 1.6; }
+.srp-team-member a { color: var(--srp-silver); }
+.srp-team-member a:hover { text-decoration: underline; }
+
+.srp-team-member {
+  padding: 18px 20px;
+  border: 1px solid rgba(200,200,200,0.1);
+  background: rgba(255,255,255,0.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  animation: creditsFloat 10s ease-in-out infinite;
+}
+.srp-team-member:nth-child(2) { animation-delay: 1.4s; }
+.srp-team-member:hover {
+  transform: translateY(-6px);
+  border-color: rgba(200,200,200,0.35);
+  box-shadow: 0 18px 40px rgba(200,200,200,0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sr-team-member,
+  .srp-team-member,
+  .srp-distributor-logo {
+    animation: none;
+  }
+}
 
 /* ═══════════════════════════════════════════════════════════════════
    RESPONSIVE — 768px

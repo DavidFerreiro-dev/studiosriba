@@ -623,10 +623,31 @@ class DatabaseRenderer {
     }
   }
 
+  async _loadJson(url, fallbackId) {
+    try {
+      const res = await fetch(url, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return await res.json();
+    } catch (err) {
+      const fallback = document.getElementById(fallbackId);
+      if (fallback) {
+        try {
+          return JSON.parse(fallback.textContent.trim());
+        } catch (parseErr) {
+          console.error(`Failed to parse inline data for ${fallbackId}:`, parseErr);
+        }
+      }
+      throw err;
+    }
+  }
+
   async renderGames() {
     try {
-      const res = await fetch('database/games.json');
-      const games = await res.json();
+      const games = await this._loadJson('database/games.json', 'sr-games-data');
+      if (!Array.isArray(games) || games.length === 0) {
+        this.gamesGrid.innerHTML = '<p class="sr-data-empty">No hay juegos disponibles ahora mismo.</p>';
+        return;
+      }
       
       let html = '';
       games.sort((a, b) => a.order - b.order).forEach((game, index) => {
@@ -686,8 +707,11 @@ class DatabaseRenderer {
 
   async renderMovies() {
     try {
-      const res = await fetch('database/movies.json');
-      const movies = await res.json();
+      const movies = await this._loadJson('database/movies.json', 'srp-movies-data');
+      if (!Array.isArray(movies) || movies.length === 0) {
+        this.moviesContainer.innerHTML = '<p class="sr-data-empty">No hay títulos disponibles ahora mismo.</p>';
+        return;
+      }
       
       let html = '';
       movies.forEach((movie, index) => {
