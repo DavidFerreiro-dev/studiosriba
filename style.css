@@ -132,6 +132,15 @@ body.grain::before {
   will-change: transform;
 }
 
+body.cursor-system {
+  cursor: auto;
+}
+
+body.cursor-system #cursor-dot,
+body.cursor-system #cursor-trail {
+  opacity: 0;
+}
+
 #cursor-dot {
   width: 8px; height: 8px;
   border-radius: 50%;
@@ -239,6 +248,11 @@ nav {
   background: transparent;
   border-bottom: 1px solid rgba(255,255,255,0.04);
   transition: background 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+nav, nav *,
+.nav-mobile-menu, .nav-mobile-menu * {
+  cursor: auto;
 }
 
 nav.scrolled {
@@ -1457,8 +1471,10 @@ body.modal-open {
   margin: 0 auto;
   padding: 0 48px 120px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 260px));
   gap: 28px;
+  justify-content: center;
+  justify-items: center;
 }
 
 .srp-film-card {
@@ -1469,6 +1485,7 @@ body.modal-open {
   text-align: left;
   cursor: none;
   width: 100%;
+  max-width: 260px;
   position: relative;
 }
 

@@ -288,6 +288,7 @@ class NavController {
     this._buildMobileMenu();
     const ham = this.nav.querySelector('.nav-hamburger');
     if (ham) ham.addEventListener('click', () => this._toggleMobile());
+    this._setupCursorVisibility();
   }
 
   _onScroll() {
@@ -317,6 +318,19 @@ class NavController {
     }
     this.nav.appendChild(menu);
     this._mobileMenu = menu;
+  }
+
+  _setupCursorVisibility() {
+    const showSystemCursor = () => document.body.classList.add('cursor-system');
+    const hideSystemCursor = () => document.body.classList.remove('cursor-system');
+
+    this.nav.addEventListener('mouseenter', showSystemCursor);
+    this.nav.addEventListener('mouseleave', hideSystemCursor);
+
+    if (this._mobileMenu) {
+      this._mobileMenu.addEventListener('mouseenter', showSystemCursor);
+      this._mobileMenu.addEventListener('mouseleave', hideSystemCursor);
+    }
   }
 
   _toggleMobile() {
