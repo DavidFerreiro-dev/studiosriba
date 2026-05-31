@@ -56,6 +56,10 @@ body[data-page="srp"] #cursor-trail {
   opacity: 0;
 }
 
+body[data-page="srp"] * {
+  cursor: auto;
+}
+
 /* ── SCROLLBAR ──────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: #000; }
