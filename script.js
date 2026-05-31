@@ -377,7 +377,7 @@ class SplitScreenController {
   }
 
   _navigate(side) {
-    const url = side === 'sr' ? 'studiosriba.html' : 'studiosribaproductions.html';
+    const url = side === 'sr' ? '/studiosriba.html' : '/studiosribaproductions/';
     this.transition.navigateTo(url);
   }
 }
@@ -651,7 +651,7 @@ class DatabaseRenderer {
 
   async renderGames() {
     try {
-      const games = await this._loadJson('database/games.json', 'sr-games-data');
+      const games = await this._loadJson('/database/games.json', 'sr-games-data');
       if (!Array.isArray(games) || games.length === 0) {
         this.gamesGrid.innerHTML = '<p class="sr-data-empty">No hay juegos disponibles ahora mismo.</p>';
         return;
@@ -715,7 +715,7 @@ class DatabaseRenderer {
 
   async renderMovies() {
     try {
-      const movies = await this._loadJson('database/movies.json', 'srp-movies-data');
+      const movies = await this._loadJson('/database/movies.json', 'srp-movies-data');
       if (!Array.isArray(movies) || movies.length === 0) {
         this.moviesContainer.innerHTML = '<p class="sr-data-empty">No hay títulos disponibles ahora mismo.</p>';
         return;
@@ -840,24 +840,11 @@ class DatabaseRenderer {
   }
 
   _getBaseListUrl() {
-    const pathname = window.location.pathname;
-    const listPath = pathname.endsWith('/studiosribaproductions.html')
-      ? pathname
-      : pathname.replace(/\/[^/]+$/, '/studiosribaproductions.html');
-    return `${window.location.origin}${listPath}`;
+    return `${window.location.origin}/studiosribaproductions/`;
   }
 
   _getMovieUrl(movieId) {
-    const pathname = window.location.pathname.replace(/\/+$/, '');
-    if (pathname.endsWith('studiosribaproductions.html')) {
-      return `${window.location.origin}${pathname.replace(/studiosribaproductions\.html$/, `studiosribaproductions/${movieId}`)}`;
-    }
-
-    if (pathname.endsWith('/studiosribaproductions')) {
-      return `${window.location.origin}${pathname}/${movieId}`;
-    }
-
-    return `${window.location.origin}${pathname.replace(/\/[^/]+$/, `/studiosribaproductions/${movieId}`)}`;
+    return `${window.location.origin}/studiosribaproductions/${movieId}`;
   }
 
   _syncMovieRoute(options = {}) {
