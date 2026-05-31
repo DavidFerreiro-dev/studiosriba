@@ -60,6 +60,12 @@ body[data-page="srp"] * {
   cursor: auto;
 }
 
+body[data-page="srp"] .srp-film-card,
+body[data-page="srp"] .srp-film-link,
+body[data-page="srp"] .srp-movie-modal-close {
+  cursor: pointer;
+}
+
 /* ── SCROLLBAR ──────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: #000; }
@@ -1776,6 +1782,13 @@ body[data-page="srp"] .srp-film-link-tertiary:hover {
   overflow: hidden;
   transition: color 0.4s ease;
   white-space: nowrap;
+}
+
+.srp-film-link-logo {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(0,0,0,0.45));
 }
 
 .srp-film-link::before {

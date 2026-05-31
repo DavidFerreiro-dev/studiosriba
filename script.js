@@ -883,17 +883,20 @@ class DatabaseRenderer {
     const nexoBtn = movie.links?.nexoTv ? `
       <a href="${movie.links.nexoTv}" target="_blank" rel="noopener noreferrer"
          class="srp-film-link srp-film-link-primary">
-        <span class="srp-film-link-icon" aria-hidden="true">▶</span>VER EN NEXO.TV
+        <img src="/media/logos/nexo.png" alt="NEXO.TV" class="srp-film-link-logo">
+        VER EN NEXO.TV
       </a>` : '';
     const tmdbBtn = movie.links?.tmdb ? `
       <a href="${movie.links.tmdb}" target="_blank" rel="noopener noreferrer"
          class="srp-film-link srp-film-link-secondary">
-        <span class="srp-film-link-icon" aria-hidden="true">↗</span>VER EN TMDB
+        <img src="/media/logos/tmdb.png" alt="TMDB" class="srp-film-link-logo">
+        VER EN TMDB
       </a>` : '';
     const imdbBtn = movie.links?.imdb ? `
       <a href="${movie.links.imdb}" target="_blank" rel="noopener noreferrer"
          class="srp-film-link srp-film-link-tertiary">
-        <span class="srp-film-link-icon" aria-hidden="true">◎</span>IMDb
+        <img src="/media/logos/imdb.png" alt="IMDb" class="srp-film-link-logo">
+        IMDb
       </a>` : '';
 
     return `${nexoBtn}${tmdbBtn}${imdbBtn}`;
