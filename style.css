@@ -1785,10 +1785,17 @@ body[data-page="srp"] .srp-film-link-tertiary:hover {
 }
 
 .srp-film-link-logo {
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   object-fit: contain;
-  filter: drop-shadow(0 0 8px rgba(0,0,0,0.45));
+  filter: drop-shadow(0 0 10px rgba(0,0,0,0.6));
+  opacity: 0.9;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.srp-film-link:hover .srp-film-link-logo {
+  transform: translateY(-1px) scale(1.05);
+  opacity: 1;
 }
 
 .srp-film-link::before {

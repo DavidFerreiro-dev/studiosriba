@@ -896,7 +896,7 @@ class DatabaseRenderer {
       <a href="${movie.links.imdb}" target="_blank" rel="noopener noreferrer"
          class="srp-film-link srp-film-link-tertiary">
         <img src="/media/logos/imdb.png" alt="IMDb" class="srp-film-link-logo">
-        IMDb
+        VER EN IMDb
       </a>` : '';
 
     return `${nexoBtn}${tmdbBtn}${imdbBtn}`;
