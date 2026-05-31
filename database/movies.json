@@ -8,7 +8,8 @@
     "posterImage": "https://huggingface.co/datasets/Deybiddd/NEXOTV/resolve/main/ElCasoDarkface.jpg",
     "links": {
       "nexoTv": "https://playnexotv.me/69",
-      "tmdb": "https://www.themoviedb.org/movie/1701009-el-caso-darkface"
+      "tmdb": "https://www.themoviedb.org/movie/1701009-el-caso-darkface",
+      "imdb": "https://www.imdb.com/es-es/title/tt43100253"
     }
   }
 ]

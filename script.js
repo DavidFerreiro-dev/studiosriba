@@ -613,12 +613,20 @@ class DatabaseRenderer {
   constructor() {
     this.gamesGrid = document.getElementById('sr-games-grid');
     this.moviesContainer = document.getElementById('srp-movies-container');
+    this.movies = [];
+    this.moviesModal = null;
+    this.movieModalState = {
+      isOpen: false,
+      deepLink: null,
+    };
     
     if (this.gamesGrid && PAGE === 'studios-riba') {
       if (this.gamesGrid.children.length === 0) this.renderGames();
     }
     
     if (this.moviesContainer && PAGE === 'srp') {
+      this._ensureMovieModal();
+      this._bindMovieRouting();
       if (this.moviesContainer.children.length === 0) this.renderMovies();
     }
   }
@@ -713,45 +721,243 @@ class DatabaseRenderer {
         return;
       }
       
+      this.movies = movies;
       let html = '';
       movies.forEach((movie, index) => {
         const delay = index * 0.1;
-        const nexoBtn = movie.links?.nexoTv ? `
-          <a href="${movie.links.nexoTv}" target="_blank" rel="noopener noreferrer"
-             class="srp-film-link srp-film-link-primary" id="srp-film-link-nexo-${index}">
-            <span class="srp-film-link-icon" aria-hidden="true">▶</span>VER EN NEXO.TV
-          </a>` : '';
-          
-        const tmdbBtn = movie.links?.tmdb ? `
-          <a href="${movie.links.tmdb}" target="_blank" rel="noopener noreferrer"
-             class="srp-film-link srp-film-link-secondary" id="srp-film-link-tmdb-${index}">
-            <span class="srp-film-link-icon" aria-hidden="true">↗</span>VER EN TMDB
-          </a>` : '';
-          
         html += `
-          <div class="srp-film-showcase reveal-scale visible" style="--delay:${delay}s; margin-bottom: 80px;">
-            <div class="srp-film-poster">
+          <button
+            type="button"
+            class="srp-film-card reveal-scale visible"
+            style="--delay:${delay}s"
+            data-movie-id="${movie.id}"
+            aria-haspopup="dialog"
+            aria-controls="srp-movie-modal"
+            aria-label="Abrir detalles de ${movie.title}">
+            <span class="srp-film-card-frame" aria-hidden="true">
               <img src="${movie.posterImage}" alt="${movie.title} — Studios Riba Productions" class="srp-film-poster-img">
-              <div class="srp-film-poster-glow" aria-hidden="true"></div>
-            </div>
-            <div class="srp-film-detail">
-              <span class="srp-film-eyebrow">${movie.type} · ${movie.year}</span>
-              <h3 class="srp-film-detail-title">${movie.title}</h3>
-              <div class="srp-film-divider" aria-hidden="true"></div>
-              <p class="srp-film-synopsis">${movie.synopsis}</p>
-              <div class="srp-film-links">
-                ${nexoBtn}
-                ${tmdbBtn}
-              </div>
-            </div>
-          </div>
+              <span class="srp-film-poster-glow" aria-hidden="true"></span>
+              <span class="srp-film-card-overlay" aria-hidden="true"></span>
+              <span class="srp-film-card-cta" aria-hidden="true">VER DETALLES</span>
+            </span>
+          </button>
         `;
       });
       
       this.moviesContainer.innerHTML = html;
+      this._attachMovieCardEvents();
+      this._syncMovieRoute({ initialRender: true });
       
     } catch (err) {
       console.error('Failed to load movies database:', err);
+    }
+  }
+
+  _ensureMovieModal() {
+    if (this.moviesModal || PAGE !== 'srp') return;
+
+    const modal = document.createElement('div');
+    modal.id = 'srp-movie-modal';
+    modal.className = 'srp-movie-modal';
+    modal.setAttribute('aria-hidden', 'true');
+    modal.innerHTML = `
+      <div class="srp-movie-modal-backdrop" data-movie-close aria-hidden="true"></div>
+      <div class="srp-movie-modal-panel" role="dialog" aria-modal="true" aria-labelledby="srp-movie-modal-title">
+        <button type="button" class="srp-movie-modal-close" data-movie-close aria-label="Cerrar información">×</button>
+        <div class="srp-movie-modal-content">
+          <div class="srp-movie-modal-poster">
+            <img class="srp-movie-modal-poster-img" alt="">
+          </div>
+          <div class="srp-movie-modal-copy">
+            <span class="srp-film-eyebrow srp-movie-modal-meta"></span>
+            <h3 class="srp-movie-modal-title" id="srp-movie-modal-title"></h3>
+            <div class="srp-film-divider" aria-hidden="true"></div>
+            <p class="srp-movie-modal-synopsis"></p>
+            <div class="srp-film-links srp-movie-modal-links"></div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    modal.addEventListener('click', (event) => {
+      if (event.target.closest('[data-movie-close]')) {
+        this.closeMovieModal();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && this.movieModalState.isOpen) {
+        this.closeMovieModal();
+      }
+    });
+
+    document.body.appendChild(modal);
+    this.moviesModal = modal;
+  }
+
+  _bindMovieRouting() {
+    if (this._movieRoutingBound || PAGE !== 'srp') return;
+    this._movieRoutingBound = true;
+
+    window.addEventListener('popstate', () => {
+      this._syncMovieRoute({ fromPopState: true });
+    });
+  }
+
+  _attachMovieCardEvents() {
+    if (!this.moviesContainer) return;
+
+    this.moviesContainer.querySelectorAll('.srp-film-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const movie = this.movies.find(item => item.id === card.dataset.movieId);
+        if (movie) this.openMovieModal(movie);
+      });
+
+      card.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          const movie = this.movies.find(item => item.id === card.dataset.movieId);
+          if (movie) this.openMovieModal(movie);
+        }
+      });
+    });
+  }
+
+  _getMovieFromId(movieId) {
+    return this.movies.find(movie => movie.id === movieId) || null;
+  }
+
+  _getMovieIdFromLocation() {
+    const queryMovie = new URLSearchParams(window.location.search).get('film');
+    if (queryMovie) return queryMovie;
+
+    const segments = window.location.pathname.replace(/\/+$/, '').split('/').filter(Boolean);
+    if (!segments.length) return null;
+
+    const lastSegment = decodeURIComponent(segments[segments.length - 1]);
+    if (lastSegment === 'studiosribaproductions' || lastSegment === 'studiosribaproductions.html') return null;
+    return lastSegment;
+  }
+
+  _getBaseListUrl() {
+    const pathname = window.location.pathname;
+    const listPath = pathname.endsWith('/studiosribaproductions.html')
+      ? pathname
+      : pathname.replace(/\/[^/]+$/, '/studiosribaproductions.html');
+    return `${window.location.origin}${listPath}`;
+  }
+
+  _getMovieUrl(movieId) {
+    const pathname = window.location.pathname.replace(/\/+$/, '');
+    if (pathname.endsWith('studiosribaproductions.html')) {
+      return `${window.location.origin}${pathname.replace(/studiosribaproductions\.html$/, `studiosribaproductions/${movieId}`)}`;
+    }
+
+    if (pathname.endsWith('/studiosribaproductions')) {
+      return `${window.location.origin}${pathname}/${movieId}`;
+    }
+
+    return `${window.location.origin}${pathname.replace(/\/[^/]+$/, `/studiosribaproductions/${movieId}`)}`;
+  }
+
+  _syncMovieRoute(options = {}) {
+    const movieId = this._getMovieIdFromLocation();
+    const movie = movieId ? this._getMovieFromId(movieId) : null;
+
+    if (movie) {
+      this.openMovieModal(movie, {
+        replaceHistory: Boolean(options.initialRender || options.fromPopState),
+        routeMode: options.initialRender ? 'deep-link' : 'external',
+      });
+      return;
+    }
+
+    if (this.movieModalState.isOpen) {
+      this._hideMovieModal();
+    }
+  }
+
+  _buildMovieLinks(movie) {
+    const nexoBtn = movie.links?.nexoTv ? `
+      <a href="${movie.links.nexoTv}" target="_blank" rel="noopener noreferrer"
+         class="srp-film-link srp-film-link-primary">
+        <span class="srp-film-link-icon" aria-hidden="true">▶</span>VER EN NEXO.TV
+      </a>` : '';
+    const tmdbBtn = movie.links?.tmdb ? `
+      <a href="${movie.links.tmdb}" target="_blank" rel="noopener noreferrer"
+         class="srp-film-link srp-film-link-secondary">
+        <span class="srp-film-link-icon" aria-hidden="true">↗</span>VER EN TMDB
+      </a>` : '';
+    const imdbBtn = movie.links?.imdb ? `
+      <a href="${movie.links.imdb}" target="_blank" rel="noopener noreferrer"
+         class="srp-film-link srp-film-link-tertiary">
+        <span class="srp-film-link-icon" aria-hidden="true">◎</span>IMDb
+      </a>` : '';
+
+    return `${nexoBtn}${tmdbBtn}${imdbBtn}`;
+  }
+
+  openMovieModal(movie, options = {}) {
+    if (!movie || PAGE !== 'srp') return;
+    this._ensureMovieModal();
+    if (!this.moviesModal) return;
+
+    const poster = this.moviesModal.querySelector('.srp-movie-modal-poster-img');
+    const meta = this.moviesModal.querySelector('.srp-movie-modal-meta');
+    const title = this.moviesModal.querySelector('.srp-movie-modal-title');
+    const synopsis = this.moviesModal.querySelector('.srp-movie-modal-synopsis');
+    const links = this.moviesModal.querySelector('.srp-movie-modal-links');
+
+    if (poster) {
+      poster.src = movie.posterImage || '';
+      poster.alt = `${movie.title} — Studios Riba Productions`;
+    }
+    if (meta) meta.textContent = `${movie.type} · ${movie.year}`;
+    if (title) title.textContent = movie.title;
+    if (synopsis) synopsis.textContent = movie.synopsis;
+    if (links) links.innerHTML = this._buildMovieLinks(movie);
+
+    this.moviesModal.classList.add('open');
+    this.moviesModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    this.movieModalState.isOpen = true;
+
+    const routeMode = options.routeMode || 'push';
+    this.movieModalState.deepLink = routeMode;
+
+    if (options.replaceHistory) {
+      history.replaceState({ movieId: movie.id }, '', this._getMovieUrl(movie.id));
+    } else if (routeMode === 'push') {
+      history.pushState({ movieId: movie.id }, '', this._getMovieUrl(movie.id));
+    }
+
+    const closeButton = this.moviesModal.querySelector('.srp-movie-modal-close');
+    if (closeButton) closeButton.focus({ preventScroll: true });
+  }
+
+  _hideMovieModal() {
+    if (!this.moviesModal) return;
+    this.moviesModal.classList.remove('open');
+    this.moviesModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    this.movieModalState.isOpen = false;
+    this.movieModalState.deepLink = null;
+  }
+
+  closeMovieModal() {
+    if (!this.moviesModal || !this.movieModalState.isOpen) return;
+
+    if (this.movieModalState.deepLink === 'deep-link') {
+      history.replaceState({}, '', this._getBaseListUrl());
+      this._hideMovieModal();
+      return;
+    }
+
+    if (window.history.length > 1) {
+      history.back();
+    } else {
+      history.replaceState({}, '', this._getBaseListUrl());
+      this._hideMovieModal();
     }
   }
   

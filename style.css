@@ -1446,6 +1446,278 @@ body[data-page="srp"] .sr-data-empty {
   line-height: 1.9;
   margin-bottom: 40px;
   max-width: 480px;
+
+body.modal-open {
+  overflow: hidden;
+}
+
+#srp-movies-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 48px 120px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 28px;
+}
+
+.srp-film-card {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  text-align: left;
+  cursor: none;
+  width: 100%;
+  position: relative;
+}
+
+.srp-film-card:focus-visible {
+  outline: 2px solid rgba(200,200,200,0.7);
+  outline-offset: 6px;
+}
+
+.srp-film-card-frame {
+  display: block;
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.02);
+  box-shadow:
+    0 24px 60px rgba(0,0,0,0.82),
+    0 0 0 1px rgba(200,200,200,0.08);
+}
+
+.srp-film-card .srp-film-poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.01);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+}
+
+.srp-film-card:hover .srp-film-poster-img,
+.srp-film-card:focus-visible .srp-film-poster-img {
+  transform: scale(1.06);
+}
+
+.srp-film-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.45) 100%);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.srp-film-card:hover .srp-film-card-overlay,
+.srp-film-card:focus-visible .srp-film-card-overlay {
+  opacity: 1;
+}
+
+.srp-film-card-cta {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%) translateY(8px);
+  opacity: 0;
+  padding: 10px 18px;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(0,0,0,0.52);
+  border-radius: 999px;
+  font-family: var(--font-srp-display);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  color: #fff;
+  white-space: nowrap;
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.srp-film-card:hover .srp-film-card-cta,
+.srp-film-card:focus-visible .srp-film-card-cta {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.srp-film-card .srp-film-poster-glow {
+  bottom: -26px;
+}
+
+body[data-page="srp"] .srp-film-link-tertiary {
+  border: 1px solid rgba(200,200,200,0.28);
+  color: var(--srp-silver);
+}
+
+body[data-page="srp"] .srp-film-link-tertiary::before {
+  background: rgba(200,200,200,0.1);
+}
+
+body[data-page="srp"] .srp-film-link-tertiary:hover {
+  color: #fff;
+}
+
+.srp-movie-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10020;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+}
+
+.srp-movie-modal.open {
+  display: flex;
+}
+
+.srp-movie-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.84);
+  backdrop-filter: blur(18px);
+}
+
+.srp-movie-modal-panel {
+  position: relative;
+  width: min(1100px, 100%);
+  max-height: min(90vh, 900px);
+  overflow: auto;
+  border-radius: 28px;
+  border: 1px solid rgba(200,200,200,0.16);
+  background:
+    radial-gradient(ellipse at top, rgba(255,255,255,0.05), transparent 55%),
+    linear-gradient(180deg, rgba(12,12,12,0.98), rgba(6,6,6,0.98));
+  box-shadow: 0 40px 120px rgba(0,0,0,0.75);
+  padding: 28px;
+}
+
+.srp-movie-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 2;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,200,200,0.22);
+  background: rgba(0,0,0,0.42);
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  cursor: none;
+}
+
+.srp-movie-modal-content {
+  display: grid;
+  grid-template-columns: minmax(240px, 360px) minmax(0, 1fr);
+  gap: 34px;
+  align-items: start;
+}
+
+.srp-movie-modal-poster {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow:
+    0 24px 60px rgba(0,0,0,0.75),
+    0 0 0 1px rgba(200,200,200,0.1);
+}
+
+.srp-movie-modal-poster-img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+}
+
+.srp-movie-modal-copy {
+  padding: 10px 6px 10px 0;
+}
+
+.srp-movie-modal-title {
+  font-family: var(--font-srp-display);
+  font-size: clamp(38px, 5vw, 72px);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 0.98;
+  color: var(--srp-warm);
+  margin-bottom: 22px;
+}
+
+.srp-movie-modal-synopsis {
+  font-family: var(--font-srp-body);
+  font-size: 18px;
+  font-style: italic;
+  line-height: 1.9;
+  color: rgba(240,237,232,0.72);
+  margin-bottom: 30px;
+  max-width: 44ch;
+}
+
+.srp-movie-modal-links {
+  margin-top: 8px;
+}
+
+@media (max-width: 980px) {
+  #srp-movies-container {
+    padding: 0 24px 96px;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .srp-movie-modal-panel {
+    padding: 22px;
+  }
+
+  .srp-movie-modal-content {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .srp-movie-modal-copy {
+    padding: 0;
+  }
+
+  .srp-movie-modal-title {
+    margin-bottom: 18px;
+  }
+
+  .srp-movie-modal-synopsis {
+    max-width: none;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  #srp-movies-container {
+    padding: 0 18px 88px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .srp-film-card-cta {
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    padding: 8px 12px;
+  }
+
+  .srp-movie-modal {
+    padding: 12px;
+  }
+
+  .srp-movie-modal-panel {
+    padding: 18px;
+    border-radius: 22px;
+    max-height: 94vh;
+  }
+
+  .srp-movie-modal-close {
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+}
 }
 
 /* ── Film links ──────────────────────────────────────────────────── */
