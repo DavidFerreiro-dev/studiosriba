@@ -736,6 +736,7 @@ class DatabaseRenderer {
       }
       
       this.movies = movies;
+      this.moviesContainer.classList.toggle('srp-movies-container--focused', movies.length <= 2);
       let html = '';
       movies.forEach((movie, index) => {
         const delay = index * 0.1;

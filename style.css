@@ -47,6 +47,15 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+body[data-page="srp"] {
+  cursor: auto;
+}
+
+body[data-page="srp"] #cursor-dot,
+body[data-page="srp"] #cursor-trail {
+  opacity: 0;
+}
+
 /* ── SCROLLBAR ──────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: #000; }
@@ -1471,10 +1480,15 @@ body.modal-open {
   margin: 0 auto;
   padding: 0 48px 120px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 260px));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 320px));
   gap: 28px;
   justify-content: center;
   justify-items: center;
+}
+
+#srp-movies-container.srp-movies-container--focused {
+  padding-bottom: 160px;
+  gap: 42px;
 }
 
 .srp-film-card {
@@ -1485,7 +1499,7 @@ body.modal-open {
   text-align: left;
   cursor: none;
   width: 100%;
-  max-width: 260px;
+  max-width: 320px;
   position: relative;
 }
 
